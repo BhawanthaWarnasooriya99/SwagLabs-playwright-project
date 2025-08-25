@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+//import baseEnvUrl from './utils/environmentBaseUrl';
 
 /**
  * Read environment variables from file.
@@ -18,7 +19,7 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 2,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -30,7 +31,24 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure'
+    // headless: false,
+    // ignoreHTTPSErrors: true,
+    // viewport: { width: 1280, height: 720 },
+    // video: 'on-first-retry',
   },
+
+  // timeout: 30000, //https://playwright.dev/docs/test-timeouts
+    // expect: {
+      /**
+       * Maximum time expect() should wait for the condition to be met.
+       * For example in `await expect(locator).toHaveText();`
+       */
+      // timeout: 10000,
+    // },
+
+  /* Folder for test artifacts such as screenshots, videos, traces, etc. */
+  // outputDir: 'test-results/',
 
   /* Configure projects for major browsers */
   projects: [
