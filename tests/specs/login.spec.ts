@@ -96,6 +96,6 @@ test.describe('Login function - Negative testcases', () => {
 });
 
 test.afterEach(async ({ page }, testInfo) => {
-    console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
+    console.log(`Finished ${testInfo.title} with status - ${testInfo.status}`);
     await page.close();
 })
