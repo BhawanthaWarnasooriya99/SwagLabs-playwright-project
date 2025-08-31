@@ -1,17 +1,18 @@
 import {test, expect} from '@playwright/test';
 import { InventoryPage } from '../pages/inventory-page';
-import { count } from 'console';
+import LoginPage from '../pages/login-page';
 
+let loginPage: LoginPage;
 let inventoryPage: InventoryPage;
 
 test.beforeEach(async ({ page }, testInfo) => {
-    console.log(`Running ${testInfo.title}`);
-    await page.goto('https://www.saucedemo.com/'); 
-    await page.getByRole('textbox', { name: 'Username' }).fill('standard_user');
-    await page.getByRole('textbox', { name: 'Password' }).fill('secret_sauce');
-    await page.getByRole('button', { name: 'Login' }).click();
-
+    loginPage = new LoginPage(page);
     inventoryPage = new InventoryPage(page);
+
+    console.log(`Running ${testInfo.title}`);
+    await page.goto('https://www.saucedemo.com/');
+    await loginPage.doLogin('standard_user', 'secret_sauce'); 
+    
 });
 
 
