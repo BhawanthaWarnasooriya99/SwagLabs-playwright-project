@@ -27,7 +27,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: 'https://www.saucedemo.com/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -52,20 +52,48 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+
+    //Setup project (runs once to log in and save state)
+    {
+      name: 'setup-standard-user',
+      testMatch: 'tests/setup/auth-setup.ts',  // your setup file
+    },
+
+    //Standard user tests across browsers
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      dependencies: ['setup-standard-user'], // depend on setup
+      use: { ...devices['Desktop Chrome'], storageState: 'tests/setup/auth.standard-user.json' }, // use saved state
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      dependencies: ['setup-standard-user'], // depend on setup
+      use: { ...devices['Desktop Firefox'], storageState: 'tests/setup/auth.standard-user.json' }, // use saved state
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      dependencies: ['setup-standard-user'], // depend on setup
+      use: { ...devices['Desktop Safari'], storageState: 'tests/setup/auth.standard-user.json' }, // use saved state},
     },
+
+
+
+    // {
+    //   name: 'chromium',
+    //   use: { ...devices['Desktop Chrome'] },
+    // },
+
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
+
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {
