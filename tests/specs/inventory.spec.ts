@@ -1,6 +1,5 @@
 import {test, expect} from '@playwright/test';
 import { InventoryPage } from '../pages/inventory-page';
-import LoginPage from '../pages/login-page';
 
 let inventoryPage: InventoryPage;
 
@@ -14,10 +13,6 @@ test.beforeEach(async ({ page }, testInfo) => {
 
 
 test.describe('Inventory function - Positive testcases', () => {
-
-    // test('@smoke - Verify Page load : User is redirected to /inventory.html and page loads successfully.', async ({ page }) => {
-    //     await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
-    // });
 
     test('@smoke - Verify text Swag Labs logo visible', async ({ page }) => {
         await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
