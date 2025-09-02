@@ -6,3 +6,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 tests/setup/auth.*.json
+tests/setup/auth.standard-user.json
+
+
