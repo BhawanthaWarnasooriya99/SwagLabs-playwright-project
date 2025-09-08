@@ -54,9 +54,10 @@ test.describe('Inventory function - Positive testcases', () => {
 
 test.describe('Inventory function - Negative testcases', () => {
 
-    // test('@smoke - ', async ({ page }) =>{
+    test('Cart Badge with No Items', async ({ page }) =>{
+        await expect(inventoryPage.shoppingCartBadge).toHaveCount(0);
+    });
 
-    // });
 });
 
 test.afterEach(async ({ page }, testInfo) => {
