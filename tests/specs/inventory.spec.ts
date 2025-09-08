@@ -51,11 +51,20 @@ test.describe('Inventory function - Positive testcases', () => {
 
 
 
-
 test.describe('Inventory function - Negative testcases', () => {
 
     test('Cart Badge with No Items', async ({ page }) =>{
         await expect(inventoryPage.shoppingCartBadge).toHaveCount(0);
+    });
+
+    test('Prevent adding same product twice', async ({ }) => {
+        await inventoryPage.addToCartButton.first().click();
+        await expect(inventoryPage.removeButton.first()).toBeVisible();
+        await expect(inventoryPage.shoppingCartBadge).toHaveText('1');
+
+        await inventoryPage.removeButton.first().click();
+        await inventoryPage.addToCartButton.first().click();
+        await expect(inventoryPage.shoppingCartBadge).toHaveText('1');
     });
 
 });
