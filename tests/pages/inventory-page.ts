@@ -10,6 +10,7 @@ export class InventoryPage {
     readonly cartIcon: Locator;
     readonly sortDropdown: Locator;
     readonly shoppingCartBadge: Locator;
+    readonly removeButton: Locator;
 
     //constructors
     constructor (page: Page) {
@@ -20,6 +21,7 @@ export class InventoryPage {
         this.cartIcon = page.locator('.shopping_cart_link');
         this.sortDropdown = page.locator('.product_sort_container');
         this.shoppingCartBadge = page.locator('.shopping_cart_badge');
+        this.removeButton = page.getByRole('button', {name: 'Remove'});
     }
 
     
